@@ -1,6 +1,6 @@
 {
   "name": "pyxis",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "associative container",
   "main": "index.ts",
   "scripts": {
