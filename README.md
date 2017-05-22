@@ -1,6 +1,6 @@
 # pyxis.ts
 # An associative container for TypeScript
-pyxis has the following properties:
+Pyxis has the following properties:
 
      a) Associative: values are referenced by key and not by position.
      
@@ -10,7 +10,7 @@ pyxis has the following properties:
      
      d) Mapped: each entry associates a key to a mapped value.
      
-TsMap currently supports the following operations:
+Pyxis currently supports the following operations:
 
      1) empty : test whether container is empty or not.
      
