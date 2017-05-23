@@ -4,7 +4,7 @@
   "description": "associative container",
   "main": "index.ts",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha -r ts-node/register tests/**/test.ts"
   },
   "repository": {
     "type": "git",
@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/p-adams/pyxis.js#readme",
   "devDependencies": {
+    "@types/chai": "^3.5.2",
+    "@types/mocha": "^2.2.41",
     "chai": "^3.5.0",
     "mocha": "^3.4.1",
-    "ts-node": "^3.0.4"
+    "ts-node": "^3.0.4",
+    "typings": "^2.1.1"
   }
 }
