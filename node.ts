@@ -4,32 +4,30 @@ class RbNode{
     left: RbNode
     right: RbNode
     parent: RbNode
-    isRed: boolean
+    isBlack: boolean
     constructor(theKey: any, theData: any){
         this.key = theKey
         this.data = theData
         this.left = null
         this.right = null
         this.parent = null
-        this.isRed = true
+        this.isBlack = false
     }
-    insertNode(root: RbNode, newNode: RbNode) : RbNode{
+    insertNode(root: any, newNode: any) : any {
         if(root === null) return newNode
-        if(newNode.getKey() === root.getKey()) {
-            return root
+        
+        if(newNode.getKey < root.getKey) {
+            root.left = this.insertNode(root.left, newNode)
+            root.left.parent = root
         }
-        else if(newNode.getKey() < root.getKey()) {
-            this.left = this.insertNode(root.getLeft, newNode)
-            root.left.setParent(root)
-        }
-        else {
-            this.right = this.insertNode(root.getRight, newNode)
-            root.right.setParent(root)
+        else if(newNode.getKey > root.getKey) {
+            root.right = this.insertNode(root.right, newNode)
+            root.right.parent = root
         }
         return root
     }
     
-    insert(root: RbNode, key: any, data: any) {
+    insert(root: any, key: any, data: any) {
         let newNode = new RbNode(key, data)
         root = this.insertNode(root, newNode)
         return root
@@ -51,7 +49,7 @@ class RbNode{
         return this.right
     }
     
-    get getSize() : any {
+    get getSize() : number {
         if(this.left === null && this.right === null) return 1
         else return this.getLeft.getSize + 1 + this.getRight.getSize
     }
