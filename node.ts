@@ -33,6 +33,13 @@ class RbNode{
         return root
     }
 
+    locate(root: any, key: any) : any {
+        if(root === null) return null
+        else if(root.getKey === key) return root
+        else if(key <= root.getKey) return this.locate(root.getLeft, key)
+        else return this.locate(root.right, key)
+    }
+
     getColor() : boolean {
         return this.isBlack
     }

@@ -65,6 +65,18 @@ describe('insert', () => {
     })
 })
 
+describe('locate', () => {
+    it('should return quux', () => {
+        let root = new RbNode(2, "foo")
+        root = root.insert(root, 1, "bar")
+        root = root.insert(root, 3, "baz")
+        root = root.insert(root, 4, "quux")
+        expect(root.locate(root, 4).getData)
+            .to
+            .equal("quux")
+    })
+})
+
 // tree tests
 describe('insert', () => {
     it('should insert 3 nodes into the tree', () => {
@@ -78,3 +90,16 @@ describe('insert', () => {
     })
 })
 
+
+describe('locate', () => {
+    it('should return quux', () => {
+        let tree = new Tree()
+        tree.insert(2, "foo")
+        tree.insert(1, "bar")
+        tree.insert(3, "baz")
+        tree.insert(4, "quux")
+        expect(tree.locate(4))
+            .to
+            .equal("quux")
+    })
+})
