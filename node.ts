@@ -32,6 +32,10 @@ class RbNode{
         root = this.insertNode(root, newNode)
         return root
     }
+
+    getColor() : boolean {
+        return this.isBlack
+    }
     // accessors
     get getKey() : any {
         return this.key

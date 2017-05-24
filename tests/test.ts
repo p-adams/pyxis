@@ -1,7 +1,7 @@
 import add from '../index'
 import RbNode from '../node'
 import Tree from '../tree'
-import {expect} from 'chai'
+import {expect, should} from 'chai'
 import 'mocha'
 
 // dummy test
@@ -53,6 +53,15 @@ describe('insert', () => {
         expect(root.getSize(root))
             .to
             .equal(3)
+    })
+})
+
+describe('insert', () => {
+    it('newly created node color should be "red" (false)', () => {
+           expect(new RbNode(1, "meow").getColor())
+            .to
+            .be
+            .false
     })
 })
 
