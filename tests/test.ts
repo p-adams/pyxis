@@ -33,7 +33,7 @@ describe('getSize', () => {
     let n3 = new RbNode(3, "baz")
     testNode.setLeft = n2
     testNode.setRight = n3
-    expect(testNode.getSize)
+    expect(testNode.getSize(testNode))
         .to
         .equal(3)
     })
@@ -42,14 +42,17 @@ describe('getSize', () => {
 describe('insert', () => {
     it('should insert 3 nodes', () => {
         let root = new RbNode(2, "foo")
-        let lChild = root.insert(root, 1, "bar")
-        let rChild = root.insert(root, 3, "baz")
+        root = root.insert(root, 1, "bar")
+        root = root.insert(root, 3, "baz")
         expect(root.getLeft.getData)
             .to
             .equal("bar")
         expect(root.getRight.getData)
             .to
             .equal("baz")
+        expect(root.getSize(root))
+            .to
+            .equal(3)
     })
 })
 
@@ -57,8 +60,8 @@ describe('insert', () => {
 describe('insert', () => {
     it('should insert 3 nodes into the tree', () => {
         let tree = new Tree()
-        tree.insert(1, "foo")
-        tree.insert(2, "bar")
+        tree.insert(2, "foo")
+        tree.insert(1, "bar")
         tree.insert(3, "baz")
         expect(tree.getSize)
             .to

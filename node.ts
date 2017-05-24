@@ -14,15 +14,15 @@ class RbNode{
         this.isBlack = false
     }
     insertNode(root: any, newNode: any) : any {
-        if(root === null) return newNode
+        if(root == null) return newNode
         
         if(newNode.getKey < root.getKey) {
             root.left = this.insertNode(root.left, newNode)
-            root.left.parent = root
+            root.left.setParent = root
         }
         else if(newNode.getKey > root.getKey) {
             root.right = this.insertNode(root.right, newNode)
-            root.right.parent = root
+            root.right.setParent = root
         }
         return root
     }
@@ -49,9 +49,11 @@ class RbNode{
         return this.right
     }
     
-    get getSize() : number {
-        if(this.left === null && this.right === null) return 1
-        else return this.getLeft.getSize + 1 + this.getRight.getSize
+    getSize(n : any) : number {
+        if(n == null) return 0
+        else {
+            return this.getSize(n.getLeft) + 1 + this.getSize(n.getRight)
+        }
     }
 
 
