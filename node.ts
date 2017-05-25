@@ -40,6 +40,50 @@ class RbNode{
         else return this.locate(root.right, key)
     }
 
+    remove(root: any, key: any) : any {
+        let result = this.locate(root, key)
+        let y = null
+        let x = null
+        if(result.getLeft != null && result.getRight != null){
+            y = this.pullupNode(result)
+        }
+        else y = result
+        if(y.getLeft != null) x = y.getLeft
+        else x = y.getRight
+        if(x) x.setParent = y.getParent
+        if(y.getParent === null) root = x
+        else{
+            if(y === y.getParent.getLeft) {
+                y.getParent.setLeft = x
+            }
+            else {
+                y.getParent.setRight = x
+            }
+        }
+        if(y != result) result.setKey = y.getKey
+        return root
+
+    }
+
+    min(node: any) : any {
+        while(node.getLeft != null) {
+            node = node.getLeft
+        }
+        return node
+    }
+
+    pullupNode(node : any) : any {
+        if(node.getRight != null) return this.min(node.getRight)
+        let parent = node.getParent
+        while(parent != null && node === parent.getRight) {
+            node = parent
+            parent = parent.getParent
+        }
+        return parent
+    }
+
+
+
     getColor() : boolean {
         return this.isBlack
     }
@@ -59,6 +103,10 @@ class RbNode{
     get getRight() : any {
         return this.right
     }
+
+    get getParent() :any {
+        return this.parent
+    }
     
     getSize(n : any) : number {
         if(n == null) return 0
@@ -67,6 +115,9 @@ class RbNode{
         }
     }
 
+    set setKey(k: any) {
+        this.key = k
+    }
 
     set setParent(p: any) {
         this.parent = p

@@ -12,6 +12,12 @@ class Tree {
     locate(key: any) : any {
         if(this.root) return this.root.locate(this.root, key).getData
     }
+    remove(key : any) {
+        if(this.root) return this.root.remove(this.root, key)
+    }
+    get getRootKey() : any {
+        return this.root.getKey
+    }
 
     get getSize() : number {
         return this.root.getSize(this.root)

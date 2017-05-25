@@ -77,6 +77,32 @@ describe('locate', () => {
     })
 })
 
+describe('min', () => {
+    it('return smallest key in tree: 1', () => {
+        let root = new RbNode(5, "foo")
+        root = root.insert(root, 1, "bar")
+        root = root.insert(root, 3, "baz")
+        root = root.insert(root, 4, "quux")
+        expect(root.min(root).getKey)
+            .to
+            .equal(1)
+    })
+})
+
+describe('remove', () => {
+    it('should remove the root and pullup 6 => meow', () => {
+        let root = new RbNode(5, "foo")
+        root = root.insert(root, 1, "bar")
+        root = root.insert(root, 9, "baz")
+        root = root.insert(root, 10, "quux")
+         root = root.insert(root, 6, "meow")
+        root.remove(root, 5)
+        expect(root.getKey)
+            .to
+            .equal(6)
+    })
+})
+
 // tree tests
 describe('insert', () => {
     it('should insert 3 nodes into the tree', () => {
@@ -92,7 +118,7 @@ describe('insert', () => {
 
 
 describe('locate', () => {
-    it('should return quux', () => {
+    it('should locate quux in Tree', () => {
         let tree = new Tree()
         tree.insert(2, "foo")
         tree.insert(1, "bar")
@@ -101,5 +127,20 @@ describe('locate', () => {
         expect(tree.locate(4))
             .to
             .equal("quux")
+    })
+})
+
+describe('remove', () => {
+    it('should remove the root from tree and pullup 8 => cucumber', () => {
+        let tree = new Tree()
+        tree.insert(5, "foo")
+        tree.insert(1, "bar")
+        tree.insert(9, "baz")
+        tree.insert(10, "quux")
+        tree.insert(8, "cucumber")
+        tree.remove(5)
+        expect(tree.getRootKey)
+            .to
+            .equal(8)
     })
 })
