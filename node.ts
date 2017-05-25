@@ -13,6 +13,12 @@ class RbNode{
         this.parent = null
         this.isBlack = false
     }
+    locate(root: any, key: any) : any {
+        if(root === null) return null
+        else if(root.getKey === key) return root
+        else if(key <= root.getKey) return this.locate(root.getLeft, key)
+        else return this.locate(root.right, key)
+    }
     insertNode(root: any, newNode: any) : any {
         if(root == null) return newNode
         
@@ -34,6 +40,49 @@ class RbNode{
         return root
     }
 
+    rotate(root: any, recolor: boolean) {
+        let x = this
+        let parent = x.getParent
+        let gp = this.getGrandparent(x)
+        if(gp != null) {
+            if(this.getRightChild(gp) === parent) {
+                gp.setRight = x
+            }
+            else {
+                gp.setLeft = x
+            }
+        }
+        else {
+            root = x
+        }
+        if(x === this.getRightChild(parent)) {
+            let left = x.getLeft
+            x.setLeft = parent
+            parent.setParent = x
+            parent.setRight = left
+            if(left != null) {
+                left.setParent = parent
+            }
+        }
+        if(x === this.getLeftChild(parent)) {
+            let right = x.getRight
+            x.setRight = parent
+            parent.setParent = x
+            parent.setLeft = right
+            if(right != null) {
+                right.setParent = parent
+            }
+        }
+
+        if(recolor) {
+            let xc : boolean = x.getColor()
+            let pc = null
+            if(parent) pc = parent.getColor()
+            x.setColor = pc
+            parent.setColor = xc
+        }
+    }
+
     processInsert(root: any, x: any) {
         x.setColor = false
         if(x != root && this.getAncestor(x).getColor === false) {
@@ -46,16 +95,39 @@ class RbNode{
                 x = gp
                 this.processInsert(root, x)
             }
+            else if(this.getAncestor(x) === this.getLeftChild(this.getGrandparent(x))) {
+                if(x === this.getRightChild(this.getAncestor(x))) {
+                    x.rotate(root, true)
+                    x.rotate(root, true)
+                }
+                else {
+                    x.getParent.rotate(root, true)
+                }
+            }
         }
 
+        root.setColor = true
+
     }
 
-    locate(root: any, key: any) : any {
-        if(root === null) return null
-        else if(root.getKey === key) return root
-        else if(key <= root.getKey) return this.locate(root.getLeft, key)
-        else return this.locate(root.right, key)
+    min(node: any) : any {
+        while(node.getLeft != null) {
+            node = node.getLeft
+        }
+        return node
     }
+
+    pullupNode(node : any) : any {
+        if(node.getRight != null) return this.min(node.getRight)
+        let parent = node.getParent
+        while(parent != null && node === parent.getRight) {
+            node = parent
+            parent = parent.getParent
+        }
+        return parent
+    }
+
+
 
     remove(root: any, key: any) : any {
         let result = this.locate(root, key)
@@ -82,23 +154,6 @@ class RbNode{
 
     }
 
-    min(node: any) : any {
-        while(node.getLeft != null) {
-            node = node.getLeft
-        }
-        return node
-    }
-
-    pullupNode(node : any) : any {
-        if(node.getRight != null) return this.min(node.getRight)
-        let parent = node.getParent
-        while(parent != null && node === parent.getRight) {
-            node = parent
-            parent = parent.getParent
-        }
-        return parent
-    }
-
     getAncestor(x : any) : any {
         if(!x) return null
         else return x.getParent
@@ -113,6 +168,16 @@ class RbNode{
         if(x === null || x.getParent === null) return null
         if(x === x.getParent.getLeft) return x.parent.getRight
         else return x.parent.getLeft
+    }
+
+    getLeftChild(x: any) : any {
+        if(!x) return null
+        else return x.getLeft
+    }
+
+    getRightChild(x: any) : any {
+        if(!x) return null
+        else return x.getRight
     }
 
 
