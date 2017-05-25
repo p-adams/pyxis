@@ -85,9 +85,9 @@ class RbNode{
 
     processInsert(root: any, x: any) {
         x.setColor = false
-        if(x != root && this.getAncestor(x).getColor === false) {
+        if(x != root && this.getAncestor(x).getColor() === false) {
             let uncle = this.getSibling(this.getAncestor(x))
-            if(uncle != null && uncle.getColor === false) {
+            if(uncle != null && uncle.getColor() === false) {
                 let pt = this.getAncestor(x)
                 this.recolor(pt, uncle, true, true)
                 let gp = this.getGrandparent(x)
@@ -104,10 +104,17 @@ class RbNode{
                     x.getParent.rotate(root, true)
                 }
             }
+            else if(this.getAncestor(x) === this.getRightChild(this.getGrandparent(x))) {
+                if(x === this.getLeftChild(this.getAncestor(x))) {
+                    x.rotate(root, true)
+                    x.rotate(root, true)
+                }
+                else {
+                    x.getParent.rotate(root, true)
+                }
+            }
         }
-
         root.setColor = true
-
     }
 
     min(node: any) : any {
@@ -126,8 +133,6 @@ class RbNode{
         }
         return parent
     }
-
-
 
     remove(root: any, key: any) : any {
         let result = this.locate(root, key)
