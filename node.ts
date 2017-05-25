@@ -30,7 +30,24 @@ class RbNode{
     insert(root: any, key: any, data: any) {
         let newNode = new RbNode(key, data)
         root = this.insertNode(root, newNode)
+        this.processInsert(root, newNode)
         return root
+    }
+
+    processInsert(root: any, x: any) {
+        x.setColor = false
+        if(x != root && getAncestor(x).getColor === false) {
+            let uncle = getSibling(getAncestor(x))
+            if(uncle != null && uncle.getColor === false) {
+                let pt = getAncestor(x)
+                recolor(pt, uncle, true, true)
+                let gp = getGrandparent(x)
+                gp.setColor = false
+                x = gp
+                this.processInsert(root, x)
+            }
+        }
+
     }
 
     locate(root: any, key: any) : any {
@@ -82,11 +99,37 @@ class RbNode{
         return parent
     }
 
+    getAncestor(x : any) : any {
+        if(!x) return null
+        else return x.getParent
+    }
+
+    getGrandparent(x : any) : any {
+       if(x === null || x.getParent === null) return null
+       else return x.getParent.getParent
+    }
+
+    getSibling(x : any) : any {
+        if(x === null || x.getParent === null) return null
+        if(x === x.getParent.getLeft) return x.parent.getRight
+        else return x.parent.getLeft
+    }
 
 
     getColor() : boolean {
         return this.isBlack
     }
+
+    recolor(x: any, y: any, c1: boolean, c2: boolean){
+        this.setNodeColor(x, c1)
+        this.setNodeColor(y, c2)
+    }
+
+    setNodeColor(x: any, color: boolean) {
+        if(x) x.setColor = color
+    }
+
+
     // accessors
     get getKey() : any {
         return this.key
@@ -129,6 +172,10 @@ class RbNode{
 
     set setRight(r: any) {
         this.right = r
+    }
+
+    set setColor(c: boolean) {
+        this.isBlack = c
     }
 
 }
