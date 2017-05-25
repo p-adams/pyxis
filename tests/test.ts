@@ -77,8 +77,8 @@ describe('getSibling', () => {
 describe('rotate', () => {
     it('new root should be 2 and should swap colors with root', () => {
         let root = new RbNode(1, "foo")
-        root = root.insert(root, 2, "bar")
-        root = root.insert(root, 3, "baz")
+        root = root.basicInsert(root, 2, "bar")
+        root = root.basicInsert(root, 3, "baz")
         let nodeToRotate = {
             root: root,
             node: root.getRight
@@ -103,9 +103,7 @@ describe('rotate', () => {
 
 
 
-
-
-/*describe('insert', () => {
+describe('insert', () => {
     it('should insert 3 nodes', () => {
         let root = new RbNode(2, "foo")
         root = root.insert(root, 1, "bar")
@@ -142,6 +140,8 @@ describe('locate', () => {
             .equal("quux")
     })
 })
+
+/*
 
 describe('min', () => {
     it('return smallest key in tree: 1', () => {
@@ -239,6 +239,6 @@ describe('clear', () => {
             .be
             .true
     })
-})
-*/
+})*/
+
 

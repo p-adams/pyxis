@@ -36,7 +36,18 @@ class RbNode{
     insert(root: any, key: any, data: any) {
         let newNode = new RbNode(key, data)
         root = this.insertNode(root, newNode)
-        //this.processInsert(root, newNode)
+        let nodeToProcess = {
+            root: root,
+            node: newNode
+        }
+        this.processInsert(nodeToProcess)
+        //console.log("node to process", nodeToProcess.root.getKey + " " + nodeToProcess.node.getKey)
+        return nodeToProcess.root
+    }
+
+    basicInsert(root: any, key: any, data: any) {
+        let newNode = new RbNode(key, data)
+        root = this.insertNode(root, newNode)
         return root
     }
 
@@ -83,18 +94,24 @@ class RbNode{
         }
     }
 
-    processInsert(root: any, x: any) {
+    processInsert(obj : any) {
+        let root : any = obj.root
+        let x : any = obj.node
         x.setColor = false
         if(x != root && this.getAncestor(x).getColor() === false) {
             let uncle = this.getSibling(this.getAncestor(x))
             if(uncle != null && uncle.getColor() === false) {
                 let pt = this.getAncestor(x)
-                let node = {root : pt, n: uncle}
-                this.recolor(node, true, true)
+                pt.setColor = true
+                uncle.setColor = true
                 let gp = this.getGrandparent(x)
                 gp.setColor = false
                 x = gp
-                this.processInsert(root, x)
+                let NTP = {
+                    root: root,
+                    node: x
+                }
+                this.processInsert(NTP)
             }
             else if(this.getAncestor(x) === this.getLeftChild(this.getGrandparent(x))) {
                 if(x === this.getRightChild(this.getAncestor(x))) {
