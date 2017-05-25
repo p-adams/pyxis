@@ -15,6 +15,13 @@ class Tree {
     remove(key : any) {
         if(this.root) return this.root.remove(this.root, key)
     }
+    clear() {
+        delete this.root
+    }
+    isEmpty() {
+        if(!this.root) return true
+        else return false
+    }
     get getRootKey() : any {
         return this.root.getKey
     }

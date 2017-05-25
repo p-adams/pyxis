@@ -95,7 +95,7 @@ describe('remove', () => {
         root = root.insert(root, 1, "bar")
         root = root.insert(root, 9, "baz")
         root = root.insert(root, 10, "quux")
-         root = root.insert(root, 6, "meow")
+        root = root.insert(root, 6, "meow")
         root.remove(root, 5)
         expect(root.getKey)
             .to
@@ -144,3 +144,34 @@ describe('remove', () => {
             .equal(8)
     })
 })
+
+describe('isEmpty', () => {
+    it('should return false', () => {
+        let tree = new Tree()
+        tree.insert(5, "foo")
+        tree.insert(1, "bar")
+        tree.insert(9, "baz")
+        tree.insert(10, "quux")
+        tree.insert(8, "cucumber")
+        expect(tree.isEmpty())
+            .to
+            .be
+            .false
+    })
+})
+describe('clear', () => {
+    it('should clear tree of all nodes and isEmpty should return true', () => {
+        let tree = new Tree()
+        tree.insert(5, "foo")
+        tree.insert(1, "bar")
+        tree.insert(9, "baz")
+        tree.insert(10, "quux")
+        tree.insert(8, "cucumber")
+        tree.clear()
+        expect(tree.isEmpty())
+            .to
+            .be
+            .true
+    })
+})
+
