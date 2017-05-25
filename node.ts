@@ -36,12 +36,14 @@ class RbNode{
     insert(root: any, key: any, data: any) {
         let newNode = new RbNode(key, data)
         root = this.insertNode(root, newNode)
-        this.processInsert(root, newNode)
+        //this.processInsert(root, newNode)
         return root
     }
 
-    rotate(root: any, recolor: boolean) {
+    rotate(obj: any, recolor: boolean) {
         let x = this
+        console.log(`rotating: ${x.getKey}`)
+        console.log(`root: ${obj.root.getKey}`)
         let parent = x.getParent
         let gp = this.getGrandparent(x)
         if(gp != null) {
@@ -53,7 +55,7 @@ class RbNode{
             }
         }
         else {
-            root = x
+            obj.root = x
         }
         if(x === this.getRightChild(parent)) {
             let left = x.getLeft

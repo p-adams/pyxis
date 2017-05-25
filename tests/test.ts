@@ -39,7 +39,58 @@ describe('getSize', () => {
     })
 })
 
-describe('insert', () => {
+describe('getAncestor', () => {
+    it('should return 2', () => {
+        let root = new RbNode(2, "foo")
+        root = root.insert(root, 1, "bar")
+        root = root.insert(root, 3, "baz")
+        expect(root.getAncestor(root.getLeft).getKey)
+            .to
+            .equal(2)
+    })
+})
+
+describe('getGranparent', () => {
+    it('should return 2', () => {
+        let root = new RbNode(2, "foo")
+        root = root.insert(root, 1, "bar")
+        root = root.insert(root, 3, "baz")
+        root = root.insert(root, 4, "quux")
+        expect(root.getGrandparent(root.getRight.getRight).getKey)
+            .to
+            .equal(2)
+    })
+})
+
+describe('getSibling', () => {
+    it('should return 3', () => {
+        let root = new RbNode(2, "foo")
+        root = root.insert(root, 1, "bar")
+        root = root.insert(root, 3, "baz")
+        root = root.insert(root, 4, "quux")
+        expect(root.getSibling(root.getLeft).getKey)
+            .to
+            .equal(3)
+    })
+})
+
+describe('rotate', () => {
+    it('root should be 2', () => {
+        let root = new RbNode(1, "foo")
+        root = root.insert(root, 2, "bar")
+        root = root.insert(root, 3, "baz")
+        let nodeToRotate = {
+            root: root,
+            node: root.getRight
+        }
+        nodeToRotate.node.rotate(nodeToRotate, true)
+        expect(nodeToRotate.root.getKey)
+            .to
+            .equal(2)
+    })
+})
+
+/*describe('insert', () => {
     it('should insert 3 nodes', () => {
         let root = new RbNode(2, "foo")
         root = root.insert(root, 1, "bar")
@@ -174,4 +225,5 @@ describe('clear', () => {
             .true
     })
 })
+*/
 
