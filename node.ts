@@ -42,8 +42,6 @@ class RbNode{
 
     rotate(obj: any, recolor: boolean) {
         let x = this
-        console.log(`rotating: ${x.getKey}`)
-        console.log(`root: ${obj.root.getKey}`)
         let parent = x.getParent
         let gp = this.getGrandparent(x)
         if(gp != null) {
@@ -91,7 +89,8 @@ class RbNode{
             let uncle = this.getSibling(this.getAncestor(x))
             if(uncle != null && uncle.getColor() === false) {
                 let pt = this.getAncestor(x)
-                this.recolor(pt, uncle, true, true)
+                let node = {root : pt, n: uncle}
+                this.recolor(node, true, true)
                 let gp = this.getGrandparent(x)
                 gp.setColor = false
                 x = gp
@@ -192,9 +191,9 @@ class RbNode{
         return this.isBlack
     }
 
-    recolor(x: any, y: any, c1: boolean, c2: boolean){
-        this.setNodeColor(x, c1)
-        this.setNodeColor(y, c2)
+    recolor(obj : any, c1: boolean, c2: boolean){
+        this.setNodeColor(obj.root, c1)
+        this.setNodeColor(obj.n, c2)
     }
 
     setNodeColor(x: any, color: boolean) {

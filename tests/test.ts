@@ -75,7 +75,7 @@ describe('getSibling', () => {
 })
 
 describe('rotate', () => {
-    it('root should be 2', () => {
+    it('new root should be 2 and should swap colors with root', () => {
         let root = new RbNode(1, "foo")
         root = root.insert(root, 2, "bar")
         root = root.insert(root, 3, "baz")
@@ -83,12 +83,27 @@ describe('rotate', () => {
             root: root,
             node: root.getRight
         }
+        nodeToRotate.root.setColor = true
         nodeToRotate.node.rotate(nodeToRotate, true)
         expect(nodeToRotate.root.getKey)
             .to
             .equal(2)
+
+        expect(nodeToRotate.root.getColor())
+            .to
+            .be
+            .true
+
+        expect(nodeToRotate.root.getLeft.getColor())
+            .to
+            .be
+            .false
     })
 })
+
+
+
+
 
 /*describe('insert', () => {
     it('should insert 3 nodes', () => {
