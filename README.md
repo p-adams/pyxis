@@ -14,15 +14,15 @@ Pyxis currently supports the following operations:
 
 1) `isEmpty` : test whether container is empty or not.
 
-2) clear : empties container
+2) `clear` : empties container
 
-3) size  : returns number of entries in container.
+3) `size`  : returns number of entries in container.
      
-4) locate(key) : locates value of entry by key. 
+4) `locate(key)` : locates value of entry by key. 
      
-5) insert(key, value) : inserts a unique key into container in sorted order.
+5) `insert(key, value)` : inserts a unique key into container in sorted order.
      
-6) remove(key) : removes key and its associated value from the container.
+6) `remove(key)` : removes key and its associated value from the container.
      
  
 
