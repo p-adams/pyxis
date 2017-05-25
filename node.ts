@@ -36,12 +36,12 @@ class RbNode{
 
     processInsert(root: any, x: any) {
         x.setColor = false
-        if(x != root && getAncestor(x).getColor === false) {
-            let uncle = getSibling(getAncestor(x))
+        if(x != root && this.getAncestor(x).getColor === false) {
+            let uncle = this.getSibling(this.getAncestor(x))
             if(uncle != null && uncle.getColor === false) {
-                let pt = getAncestor(x)
-                recolor(pt, uncle, true, true)
-                let gp = getGrandparent(x)
+                let pt = this.getAncestor(x)
+                this.recolor(pt, uncle, true, true)
+                let gp = this.getGrandparent(x)
                 gp.setColor = false
                 x = gp
                 this.processInsert(root, x)
