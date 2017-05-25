@@ -12,7 +12,7 @@ Pyxis has the following properties:
      
 Pyxis currently supports the following operations:
 
-1) isEmpty : test whether container is empty or not.
+1) `isEmpty` : test whether container is empty or not.
 
 2) clear : empties container
 
