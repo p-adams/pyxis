@@ -1,17 +1,16 @@
-class RbNode{
+class BSTNode{
     key: any
     data: any 
-    left: RbNode
-    right: RbNode
-    parent: RbNode
-    isBlack: boolean
+    left: BSTNode
+    right: BSTNode
+    parent: BSTNode
+   
     constructor(theKey: any, theData: any){
         this.key = theKey
         this.data = theData
         this.left = null
         this.right = null
         this.parent = null
-        this.isBlack = false
     }
     locate(root: any, key: any) : any {
         if(root === null) return null
@@ -38,108 +37,9 @@ class RbNode{
     }
     
     insert(root: any, key: any, data: any) {
-        let newNode = new RbNode(key, data)
-        root = this.insertNode(root, newNode)
-        let nodeToProcess = {
-            root: root,
-            node: newNode
-        }
-        this.processInsert(nodeToProcess)
-        //console.log("node to process", nodeToProcess.root.getKey + " " + nodeToProcess.node.getKey)
-        return nodeToProcess.root
-    }
-
-    basicInsert(root: any, key: any, data: any) {
-        let newNode = new RbNode(key, data)
+        let newNode = new BSTNode(key, data)
         root = this.insertNode(root, newNode)
         return root
-    }
-
-    rotate(obj: any, recolor: boolean) {
-        let x = this
-        let parent = x.getParent
-        //console.log(`rotating: ${x.key} and the root is: ${obj.root != null ? obj.root.key : "meow"}`)
-        let gp = this.getGrandparent(x)
-        if(gp != null) {
-            if(this.getRightChild(gp) === parent) {
-                gp.setRight = x
-            }
-            else {
-                gp.setLeft = x
-            }
-        }
-        else {
-            obj.root = x
-        }
-        if(x === this.getRightChild(parent)) {
-            let left = x.getLeft
-            x.setLeft = parent
-            parent.setParent = x
-            parent.setRight = left
-            if(left != null) {
-                left.setParent = parent
-            }
-        }
-        if(x === this.getLeftChild(parent)) {
-            let right = x.getRight
-            x.setRight = parent
-            parent.setParent = x
-            parent.setLeft = right
-            if(right != null) {
-                right.setParent = parent
-            }
-        }
-
-        if(recolor) {
-            let xc : boolean = x.getColor()
-            let pc = null
-            if(parent) pc = parent.getColor()
-            x.setColor = pc
-            parent.setColor = xc
-        }
-    }
-
-    processInsert(obj : any) {
-        //let root : any = obj.root
-        let x : any = obj.node
-        //console.log(`IN PROCESS INSERT: ${obj.root.key} | ${x.key}`)
-        x.setColor = false
-        if(x != obj.root && this.getAncestor(x).getColor() === false) {
-            let uncle = this.getSibling(this.getAncestor(x))
-            if(uncle != null && uncle.getColor() === false) {
-                let pt = this.getAncestor(x)
-                pt.setColor = true
-                uncle.setColor = true
-                let gp = this.getGrandparent(x)
-                gp.setColor = false
-                x = gp
-                let NTP = {
-                    root: obj.root,
-                    node: x
-                }
-                this.processInsert(NTP)
-            }
-            else if(this.getAncestor(x) === this.getLeftChild(this.getGrandparent(x))) {
-                if(x === this.getRightChild(this.getAncestor(x))) {
-                    x.rotate(obj, true)
-                    x.rotate(obj, true)
-                }
-                else {
-                    x.getParent.rotate(obj, true)
-                }
-            }
-            else if(this.getAncestor(x) === this.getRightChild(this.getGrandparent(x))) {
-                if(x === this.getLeftChild(this.getAncestor(x))) {
-                    x.rotate(obj, true)
-                    x.rotate(obj, true)
-                }
-                else {
-                    x.getParent.rotate(obj, true)
-                    //console.log(`root down here: ${obj.root.key}`)
-                }
-            }
-        }
-        obj.root.setColor = true
     }
 
     min(node: any) : any {
@@ -184,46 +84,7 @@ class RbNode{
 
     }
 
-    getAncestor(x : any) : any {
-        if(!x) return null
-        else return x.getParent
-    }
-
-    getGrandparent(x : any) : any {
-       if(x === null || x.getParent === null) return null
-       else return x.getParent.getParent
-    }
-
-    getSibling(x : any) : any {
-        if(x === null || x.getParent === null) return null
-        if(x === x.getParent.getLeft) return x.parent.getRight
-        else return x.parent.getLeft
-    }
-
-    getLeftChild(x: any) : any {
-        if(!x) return null
-        else return x.getLeft
-    }
-
-    getRightChild(x: any) : any {
-        if(!x) return null
-        else return x.getRight
-    }
-
-
-    getColor() : boolean {
-        return this.isBlack
-    }
-
-    recolor(obj : any, c1: boolean, c2: boolean){
-        this.setNodeColor(obj.root, c1)
-        this.setNodeColor(obj.n, c2)
-    }
-
-    setNodeColor(x: any, color: boolean) {
-        if(x) x.setColor = color
-    }
-
+    
 
     // accessors
     get getKey() : any {
@@ -242,16 +103,12 @@ class RbNode{
         return this.right
     }
 
-    get getParent() :any {
+    get getParent() : any {
         return this.parent
     }
     
     set setKey(k: any) {
         this.key = k
-    }
-
-    set setParent(p: any) {
-        this.parent = p
     }
 
     set setLeft(l: any) {
@@ -261,11 +118,6 @@ class RbNode{
     set setRight(r: any) {
         this.right = r
     }
-
-    set setColor(c: boolean) {
-        this.isBlack = c
-    }
-
 }
 
-export default RbNode
+export default BSTNode

@@ -1,5 +1,5 @@
 import add from '../index'
-import RbNode from '../node'
+import BSTNode from '../node'
 import Tree from '../tree'
 import {expect, should} from 'chai'
 import 'mocha'
@@ -15,8 +15,8 @@ describe('add function', () => {
 
 // node tests
 describe('constructor', () => {
-    it('should create new RbNode with key: 1 and data: "foo" ', () => {
-        let testNode = new RbNode(1, "foo")
+    it('should create new BSTNode with key: 1 and data: "foo" ', () => {
+        let testNode = new BSTNode(1, "foo")
         expect(testNode.getKey)
             .to
             .equal(1)
@@ -28,9 +28,9 @@ describe('constructor', () => {
 
 describe('getSize', () => {
     it('should return 3', () => {
-    let testNode = new RbNode(2, "foo")
-    let n2 = new RbNode(1, "bar")
-    let n3 = new RbNode(3, "baz")
+    let testNode = new BSTNode(2, "foo")
+    let n2 = new BSTNode(1, "bar")
+    let n3 = new BSTNode(3, "baz")
     testNode.setLeft = n2
     testNode.setRight = n3
     expect(testNode.getSize(testNode))
@@ -39,104 +39,13 @@ describe('getSize', () => {
     })
 })
 
-describe('getAncestor', () => {
-    it('should return 2', () => {
-        let root = new RbNode(2, "foo")
-        root = root.insert(root, 1, "bar")
-        root = root.insert(root, 3, "baz")
-        expect(root.getAncestor(root.getLeft).getKey)
-            .to
-            .equal(2)
-    })
-})
-
-describe('getGranparent', () => {
-    it('should return 2', () => {
-        let root = new RbNode(2, "foo")
-        root = root.insert(root, 1, "bar")
-        root = root.insert(root, 3, "baz")
-        root = root.insert(root, 4, "quux")
-        expect(root.getGrandparent(root.getRight.getRight).getKey)
-            .to
-            .equal(2)
-    })
-})
-
-describe('getSibling', () => {
-    it('should return 3', () => {
-        let root = new RbNode(2, "foo")
-        root = root.insert(root, 1, "bar")
-        root = root.insert(root, 3, "baz")
-        root = root.insert(root, 4, "quux")
-        expect(root.getSibling(root.getLeft).getKey)
-            .to
-            .equal(3)
-    })
-})
-
-describe('rotate', () => {
-    it('new root should be 2 and should swap colors with root', () => {
-        let root = new RbNode(1, "foo")
-        root = root.basicInsert(root, 2, "bar")
-        root = root.basicInsert(root, 3, "baz")
-        let nodeToRotate = {
-            root: root,
-            node: root.getRight
-        }
-        nodeToRotate.root.setColor = true
-        nodeToRotate.node.rotate(nodeToRotate, true)
-        expect(nodeToRotate.root.getKey)
-            .to
-            .equal(2)
-
-        expect(nodeToRotate.root.getColor())
-            .to
-            .be
-            .true
-
-        expect(nodeToRotate.root.getLeft.getColor())
-            .to
-            .be
-            .false
-    })
-})
-
-
-
 describe('insert', () => {
     it('should insert 5 nodes; the smallest of which is "a"', () => {
-        let root = new RbNode("m", "foo")
+        let root = new BSTNode("m", "foo")
         root = root.insert(root, "a", "bar")
         root = root.insert(root, "o", "baz")
         root = root.insert(root, "r", "bin")
         root = root.insert(root, "s", "quux")
-        expect(root.getKey)
-            .to
-            .equal("m")
-
-        expect(root.getColor())
-            .to
-            .be
-            .true
-
-        expect(root.getRight.getKey)
-            .to
-            .equal("r")
-
-        expect(root.getRight.getColor())
-            .to
-            .be
-            .true
-
-        expect(root.getLeft.getKey)
-            .to
-            .equal("a")
-
-        expect(root.getLeft.getColor())
-            .to
-            .be
-            .true
-
         expect(root.getSize(root))
             .to
             .equal(5)
@@ -147,18 +56,9 @@ describe('insert', () => {
     })
 })
 
-describe('insert', () => {
-    it('newly created node color should be "red" (false)', () => {
-           expect(new RbNode(1, "meow").getColor())
-            .to
-            .be
-            .false
-    })
-})
-
 describe('locate', () => {
     it('should return quux', () => {
-        let root = new RbNode(2, "foo")
+        let root = new BSTNode(2, "foo")
         root = root.insert(root, 1, "bar")
         root = root.insert(root, 3, "baz")
         root = root.insert(root, 4, "quux")
@@ -168,13 +68,9 @@ describe('locate', () => {
     })
 })
 
-
-
-/*
-
 describe('remove', () => {
     it('should remove the root and pullup 6 => meow', () => {
-        let root = new RbNode(5, "foo")
+        let root = new BSTNode(5, "foo")
         root = root.insert(root, 1, "bar")
         root = root.insert(root, 9, "baz")
         root = root.insert(root, 10, "quux")
@@ -188,17 +84,22 @@ describe('remove', () => {
 
 // tree tests
 describe('insert', () => {
-    it('should insert 3 nodes into the tree', () => {
+    it('should insert 9 nodes into the tree', () => {
         let tree = new Tree()
-        tree.insert(2, "foo")
-        tree.insert(1, "bar")
+        tree.insert(1, "foo")
+        tree.insert(2, "bar")
         tree.insert(3, "baz")
+        tree.insert(4, "foo")
+        tree.insert(5, "bar")
+        tree.insert(6, "baz")
+        tree.insert(7, "foo")
+        tree.insert(8, "bar")
+        tree.insert(9, "baz")
         expect(tree.getSize)
             .to
-            .equal(3)
+            .equal(9)
     })
 })
-
 
 describe('locate', () => {
     it('should locate quux in Tree', () => {
@@ -256,6 +157,6 @@ describe('clear', () => {
             .be
             .true
     })
-})*/
+})
 
 

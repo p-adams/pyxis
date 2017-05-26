@@ -7,7 +7,7 @@ class Tree {
     }
     insert(key: any, data: any) : void {
         if(!this.root) this.root = new RbNode(key, data)
-        this.root = this.root.insert(this.root, key, data)
+        else this.root = this.root.insert(this.root, key, data)
     }
     locate(key: any) : any {
         if(this.root) return this.root.locate(this.root, key).getData
