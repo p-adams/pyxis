@@ -26,13 +26,20 @@ class Tree {
         return this.root.getKey
     }
     get getSize() : number {
-        return this.root.getSize(this.root)
+        if(!this.root) return 0
+        else return this.root.getSize(this.root)
     }
     get beg() : any {
         return this.root.min(this.root)
     }
     get end() : any {
         return this.root.max(this.root)
+    }
+    get getKey() : any {
+        return this.root.getKey
+    }
+    enum() : any {
+        if(this.root) return this.root.enum(this.root).reverse()
     }
 }
 

@@ -215,5 +215,47 @@ describe('remove', () => {
             .equal(6)
     })
 })
+describe('locate', () => {
+    it('should return value of key "2"', () => {
+        let container = new Container()
+        for(let i = 0; i < 7; i++){
+            container.insert(keys[i], values[i])
+        }
+        let result = container.locate(2)
+        expect(result)
+            .to
+            .equal("b")
+        
+        //container.enum().forEach(el => {
+        //console.log(`key: ${el.key} value ${el.value}`)
+    })
+    })
+})
+describe('empty', () => {
+    it('should return false', () => {
+        let container = new Container()
+        for(let i = 0; i < 7; i++){
+            container.insert(keys[i], values[i])
+        }
+        expect(container.empty())
+            .to
+            .be
+            .false
+    })
+})
+describe('clear', () => {
+    it('should clear contents of container', () => {
+        let container = new Container()
+        for(let i = 0; i < 7; i++){
+            container.insert(keys[i], values[i])
+        }
+        container.clear()
+        expect(container.size())
+            .to
+            .equal(0)
+    })
+})
 
+
+   
 

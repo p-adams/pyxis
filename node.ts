@@ -4,6 +4,7 @@ class BSTNode{
     left: BSTNode
     right: BSTNode
     parent: BSTNode
+    dt: any[] = []
    
     constructor(theKey: any, theData: any){
         this.key = theKey
@@ -87,13 +88,19 @@ class BSTNode{
 			let temp = this.min(root.right);
 			root.key = temp.key;
 			root.right = this.remove(root.right, temp.key);
-		}
-	}
-	return root;
-}
+		    }
+	    }
+	    return root;
+    }
 
-    
-
+   enum(root: any) : any {
+        if(root == null) return this.dt
+        if(root.left) this.dt = root.left.enum(root.left)
+        if(root.right) this.dt = root.right.enum(root.right)
+        this.dt.push({key: this.key, value: this.data})
+        return this.dt
+    }
+ 
     // accessors
     get getKey() : any {
         return this.key

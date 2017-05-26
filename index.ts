@@ -14,7 +14,7 @@ class Container {
         return this.tree.locate(key)
     }
     empty() : boolean{
-        return this.tree.empty()
+        return this.tree.isEmpty()
     }
     clear() {
         this.tree.clear()
@@ -22,14 +22,10 @@ class Container {
     size() {
         return this.tree.getSize
     }
-    beg() {
-        return this.tree.beg
-    }
-    end() {
-        return this.tree.end
+    enum() {
+        return this.tree.enum()
     }
 
 }
 
-//let container = new Container
 export default Container

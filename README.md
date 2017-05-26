@@ -23,6 +23,8 @@ Pyxis currently supports the following operations:
 5) `insert(key, value)` : inserts a unique key into container in sorted order.
      
 6) `remove(key)` : removes key and its associated value from the container.
+
+7) `enum` : enumerate the keys in the container
      
  
 
