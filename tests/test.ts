@@ -1,4 +1,4 @@
-import add from '../index'
+import Container from '../index'
 import BSTNode from '../node'
 import Tree from '../tree'
 import {expect, should} from 'chai'
@@ -124,6 +124,9 @@ describe('remove', () => {
         expect(tree.getRootKey)
             .to
             .equal(8)
+        expect(tree.getSize)
+            .to
+            .equal(4)
     })
 })
 
@@ -182,6 +185,34 @@ describe('end', () => {
         expect(tree.end.getKey)
             .to
             .equal(10)
+    })
+})
+
+// container tests
+let keys: number[] = [1,2,3,4,5,6,7]
+let values: string[] = ["a", "b", "c", "d", "e", "f", "g"]
+describe('insert', () => {
+    it('should insert 7 keys and 7 values into container and should contain 7 elements', () => {
+        let container = new Container()
+        for(let i = 0; i < 7; i++){
+            container.insert(keys[i], values[i])
+        }
+        expect(container.size())
+            .to
+            .equal(7)
+    })
+})
+
+describe('remove', () => {
+    it('should remove element with key "4"', () => {
+        let container = new Container()
+        for(let i = 0; i < 7; i++){
+            container.insert(keys[i], values[i])
+        }
+        container.remove(5)
+        expect(container.size())
+            .to
+            .equal(6)
     })
 })
 

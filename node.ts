@@ -67,29 +67,30 @@ class BSTNode{
     }
 
     remove(root: any, key: any) : any {
-        let result = this.locate(root, key)
-        let y = null
-        let x = null
-        if(result.getLeft != null && result.getRight != null){
-            y = this.pullupNode(result)
-        }
-        else y = result
-        if(y.getLeft != null) x = y.getLeft
-        else x = y.getRight
-        if(x) x.setParent = y.getParent
-        if(y.getParent === null) root = x
-        else{
-            if(y === y.getParent.getLeft) {
-                y.getParent.setLeft = x
-            }
-            else {
-                y.getParent.setRight = x
-            }
-        }
-        if(y != result) result.setKey = y.getKey
-        return root
-
-    }
+        if (root == null) return root;
+	    else if (key < root.key) root.left = this.remove(root.left, key);
+	    else if (key > root.key) root.right = this.remove(root.right, key);
+	    else {
+		if (root.left == null && root.right == null) {
+			let temp = root;
+			root = root.right;
+		}
+		else if (root.right == null) {
+			let temp = root;
+			root = root.left;
+		}
+		else if (root.left == null) {
+			let temp = root;
+			root = root.right;
+		} 
+		else {
+			let temp = this.min(root.right);
+			root.key = temp.key;
+			root.right = this.remove(root.right, temp.key);
+		}
+	}
+	return root;
+}
 
     
 
