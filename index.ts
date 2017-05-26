@@ -13,16 +13,16 @@ class Container {
     locate(key: any) : any {
         return this.tree.locate(key)
     }
-    empty() : boolean{
+    empty() : boolean {
         return this.tree.isEmpty()
     }
     clear() {
         this.tree.clear()
     }
-    size() {
+    size() : number {
         return this.tree.getSize
     }
-    enum() {
+    enum() : any {
         return this.tree.enum()
     }
 
