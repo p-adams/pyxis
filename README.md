@@ -1,6 +1,5 @@
 # pyxis.ts
-# An associative container for TypeScript
-<h2>Pyxis has the following properties:<h2>
+# An associative container for TypeScript</h2>
 
 1) Associative: values are referenced by key and not by position.
      
