@@ -1,5 +1,6 @@
-export const add = function() : string {
-    return `2 + 2 = ${4}`
+import Tree from './tree'
+class Container {
+    
 }
 
 export default add

@@ -4,13 +4,7 @@ import Tree from '../tree'
 import {expect, should} from 'chai'
 import 'mocha'
 
-// dummy test
-describe('add function', () => {
-    it('should print 2 + 2 = 4', () => {
-        let res = add()
-        expect(res).to.equal('2 + 2 = 4')
-    })
-})
+
 
 
 // node tests
@@ -40,7 +34,7 @@ describe('getSize', () => {
 })
 
 describe('insert', () => {
-    it('should insert 5 nodes; the smallest of which is "a"', () => {
+    it('should insert 5 nodes; the smallest of which is "a" and largest is "s"', () => {
         let root = new BSTNode("m", "foo")
         root = root.insert(root, "a", "bar")
         root = root.insert(root, "o", "baz")
@@ -53,6 +47,10 @@ describe('insert', () => {
         expect(root.min(root).getKey)
             .to
             .equal("a")
+
+        expect(root.max(root).getKey)
+            .to
+            .equal("s")
     })
 })
 
@@ -156,6 +154,34 @@ describe('clear', () => {
             .to
             .be
             .true
+    })
+})
+
+describe('beg', () => {
+    it('should return smallest element in tree', () => {
+        let tree = new Tree()
+        tree.insert(5, "foo")
+        tree.insert(1, "bar")
+        tree.insert(9, "baz")
+        tree.insert(10, "quux")
+        tree.insert(8, "cucumber")
+        expect(tree.beg.getKey)
+            .to
+            .equal(1)
+    })
+})
+
+describe('end', () => {
+    it('should return largest element in tree', () => {
+        let tree = new Tree()
+        tree.insert(5, "foo")
+        tree.insert(1, "bar")
+        tree.insert(9, "baz")
+        tree.insert(10, "quux")
+        tree.insert(8, "cucumber")
+        expect(tree.end.getKey)
+            .to
+            .equal(10)
     })
 })
 

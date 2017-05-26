@@ -49,6 +49,13 @@ class BSTNode{
         return node
     }
 
+    max(node: any) : any {
+        while(node.getRight != null) {
+            node = node.getRight
+        }
+        return node
+    }
+
     pullupNode(node : any) : any {
         if(node.getRight != null) return this.min(node.getRight)
         let parent = node.getParent
@@ -104,11 +111,15 @@ class BSTNode{
     }
 
     get getParent() : any {
-        return this.parent
+        return this.right
     }
     
     set setKey(k: any) {
         this.key = k
+    }
+
+    set setParent(p: any) {
+        this.parent = p
     }
 
     set setLeft(l: any) {
@@ -118,6 +129,8 @@ class BSTNode{
     set setRight(r: any) {
         this.right = r
     }
+
+
 }
 
 export default BSTNode

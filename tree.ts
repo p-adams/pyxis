@@ -25,9 +25,14 @@ class Tree {
     get getRootKey() : any {
         return this.root.getKey
     }
-
     get getSize() : number {
         return this.root.getSize(this.root)
+    }
+    get beg() : any {
+        return this.root.min(this.root)
+    }
+    get end() : any {
+        return this.root.max(this.root)
     }
 }
 
