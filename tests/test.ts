@@ -209,7 +209,7 @@ describe('remove', () => {
         for(let i = 0; i < 7; i++){
             container.insert(keys[i], values[i])
         }
-        container.remove(5)
+        container.remove(3)
         expect(container.size())
             .to
             .equal(6)

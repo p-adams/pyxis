@@ -13,7 +13,7 @@ class Tree {
         if(this.root) return this.root.locate(this.root, key).getData
     }
     remove(key : any) {
-        if(this.root) return this.root.remove(this.root, key)
+        if(this.root) this.root = this.root.remove(this.root, key)
     }
     clear() {
         delete this.root
