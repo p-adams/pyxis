@@ -225,10 +225,6 @@ describe('locate', () => {
         expect(result)
             .to
             .equal("b")
-        
-        //container.enum().forEach(el => {
-        //console.log(`key: ${el.key} value ${el.value}`)
-    })
     })
 })
 describe('empty', () => {
