@@ -104,19 +104,31 @@ describe('rotate', () => {
 
 
 describe('insert', () => {
-    it('should insert 3 nodes', () => {
-        let root = new RbNode(2, "foo")
-        root = root.insert(root, 1, "bar")
-        root = root.insert(root, 3, "baz")
-        expect(root.getLeft.getData)
+    it('should insert 5 nodes; the smallest of which is "a"', () => {
+        let root = new RbNode("m", "foo")
+        root = root.insert(root, "a", "bar")
+        root = root.insert(root, "o", "baz")
+        root = root.insert(root, "r", "bin")
+        root = root.insert(root, "s", "quux")
+        expect(root.getKey)
             .to
-            .equal("bar")
-        expect(root.getRight.getData)
+            .equal("m")
+
+        expect(root.getRight.getKey)
             .to
-            .equal("baz")
+            .equal("r")
+
+        expect(root.getLeft.getKey)
+            .to
+            .equal("a")
+
         expect(root.getSize(root))
             .to
-            .equal(3)
+            .equal(5)
+
+        expect(root.min(root).getKey)
+            .to
+            .equal("a")
     })
 })
 
@@ -141,19 +153,9 @@ describe('locate', () => {
     })
 })
 
-/*
 
-describe('min', () => {
-    it('return smallest key in tree: 1', () => {
-        let root = new RbNode(5, "foo")
-        root = root.insert(root, 1, "bar")
-        root = root.insert(root, 3, "baz")
-        root = root.insert(root, 4, "quux")
-        expect(root.min(root).getKey)
-            .to
-            .equal(1)
-    })
-})
+
+/*
 
 describe('remove', () => {
     it('should remove the root and pullup 6 => meow', () => {

@@ -19,6 +19,10 @@ class RbNode{
         else if(key <= root.getKey) return this.locate(root.getLeft, key)
         else return this.locate(root.right, key)
     }
+    getSize(n : any) : number {
+        if(n == null) return 0
+        else return this.getSize(n.getLeft) + 1 + this.getSize(n.getRight)
+    }
     insertNode(root: any, newNode: any) : any {
         if(root == null) return newNode
         
@@ -54,6 +58,7 @@ class RbNode{
     rotate(obj: any, recolor: boolean) {
         let x = this
         let parent = x.getParent
+        //console.log(`rotating: ${x.key} and the root is: ${obj.root != null ? obj.root.key : "meow"}`)
         let gp = this.getGrandparent(x)
         if(gp != null) {
             if(this.getRightChild(gp) === parent) {
@@ -95,10 +100,11 @@ class RbNode{
     }
 
     processInsert(obj : any) {
-        let root : any = obj.root
+        //let root : any = obj.root
         let x : any = obj.node
+        //console.log(`IN PROCESS INSERT: ${obj.root.key} | ${x.key}`)
         x.setColor = false
-        if(x != root && this.getAncestor(x).getColor() === false) {
+        if(x != obj.root && this.getAncestor(x).getColor() === false) {
             let uncle = this.getSibling(this.getAncestor(x))
             if(uncle != null && uncle.getColor() === false) {
                 let pt = this.getAncestor(x)
@@ -108,31 +114,32 @@ class RbNode{
                 gp.setColor = false
                 x = gp
                 let NTP = {
-                    root: root,
+                    root: obj.root,
                     node: x
                 }
                 this.processInsert(NTP)
             }
             else if(this.getAncestor(x) === this.getLeftChild(this.getGrandparent(x))) {
                 if(x === this.getRightChild(this.getAncestor(x))) {
-                    x.rotate(root, true)
-                    x.rotate(root, true)
+                    x.rotate(obj, true)
+                    x.rotate(obj, true)
                 }
                 else {
-                    x.getParent.rotate(root, true)
+                    x.getParent.rotate(obj, true)
                 }
             }
             else if(this.getAncestor(x) === this.getRightChild(this.getGrandparent(x))) {
                 if(x === this.getLeftChild(this.getAncestor(x))) {
-                    x.rotate(root, true)
-                    x.rotate(root, true)
+                    x.rotate(obj, true)
+                    x.rotate(obj, true)
                 }
                 else {
-                    x.getParent.rotate(root, true)
+                    x.getParent.rotate(obj, true)
+                    //console.log(`root down here: ${obj.root.key}`)
                 }
             }
         }
-        root.setColor = true
+        obj.root.setColor = true
     }
 
     min(node: any) : any {
@@ -239,13 +246,6 @@ class RbNode{
         return this.parent
     }
     
-    getSize(n : any) : number {
-        if(n == null) return 0
-        else {
-            return this.getSize(n.getLeft) + 1 + this.getSize(n.getRight)
-        }
-    }
-
     set setKey(k: any) {
         this.key = k
     }
