@@ -114,13 +114,28 @@ describe('insert', () => {
             .to
             .equal("m")
 
+        expect(root.getColor())
+            .to
+            .be
+            .true
+
         expect(root.getRight.getKey)
             .to
             .equal("r")
 
+        expect(root.getRight.getColor())
+            .to
+            .be
+            .true
+
         expect(root.getLeft.getKey)
             .to
             .equal("a")
+
+        expect(root.getLeft.getColor())
+            .to
+            .be
+            .true
 
         expect(root.getSize(root))
             .to
